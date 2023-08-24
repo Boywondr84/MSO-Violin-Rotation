@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  font-family: sans-serif;
+  margin-bottom: 40px;
+}
+
+.header img {
+  margin: 0px 88px 0 10px;
+  width: 30%;
+}
+
+.header h1 {
+  text-align: center;
+  color: white;
+  word-spacing: 5px;
+  /* letter-spacing: 3px; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 57px 120px 25px 100px;
+  width: 70%;
+  background-color: #2f236b;
+}
