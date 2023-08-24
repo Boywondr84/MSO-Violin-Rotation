@@ -1,0 +1,14 @@
+#header img {
+  margin-left: 8px;
+}
+
+#header h1 {
+  background-color: #2f236b;
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 42px 120px 51px 100px;
+  text-align: center;
+  word-spacing: 3px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

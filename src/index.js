@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 
+import "spectre.css";
+import "./style.css";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDIvjMfNmUtDkaQmEiEu3D0ib1RhMI-o8Q",
   authDomain: "mso-violin-i-rotation.firebaseapp.com",
