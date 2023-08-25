@@ -8,6 +8,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
   deleteDoc,
   doc,
   addDoc,
@@ -31,6 +32,12 @@ const COLREF = collection(DB, "Violinists");
 
 // Violinists DB Data
 let violinistsData = [{}];
+
+// get violinist data - Fetch form
+let violinFormId = [];
+
+// holds single violinist data from Fetch
+let violinDataByID = [];
 
 // get by ID form
 const GET_MSO_VIOLINIST = document.getElementById("get-violinist-select");
@@ -91,8 +98,14 @@ DELETE_VIOLINIST.addEventListener("submit", (event) => {
 });
 
 // get data for violinist
-const GET_DATA = document.querySelector(".getVlnDataById");
+const GET_DATA = document.querySelector(".getVlnData");
 GET_DATA.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log("Get Button clicked");
+  violinFormId.push(GET_MSO_DATA.value);
+  const DOCREF = doc(DB, "Violinists", GET_MSO_DATA.value);
+
+  getDoc(DOCREF).then((doc) => {
+    violinDataByID.push({ ...doc.data() });
+    // console.log(violinDataByID[0]);
+  });
 });
