@@ -4,7 +4,13 @@ import "./style.css";
 
 // Firebase import
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIvjMfNmUtDkaQmEiEu3D0ib1RhMI-o8Q",
@@ -27,7 +33,12 @@ let violinistsData = [{}];
 
 // get by ID form
 const GET_MSO_VIOLINIST = document.getElementById("get-violinist-select");
-const GET_MSO_DATA = document.getElementsByClassName("getID");
+const GET_MSO_DATA = document.querySelector(".getID");
+
+// delete violinist
+// const DELETE_VIOLINIST_BY_ID = document.getElementById(
+//   "delete-violinist-by-id"
+// );
 
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
@@ -50,4 +61,17 @@ getDocs(COLREF).then((snapshot) => {
     getSelectedViolinist.value = violinistsData[i].id;
     GET_MSO_VIOLINIST.appendChild(getSelectedViolinist);
   }
+});
+
+// delete violinist
+const DELETE_VIOLINIST = document.querySelector(".getVlnDataById");
+DELETE_VIOLINIST.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const DOCREF = doc(DB, "Violinists", GET_MSO_DATA.value);
+
+  deleteDoc(DOCREF).then(() => {
+    alert("Violinist deleted!");
+    window.location.reload();
+  });
 });

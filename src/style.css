@@ -13,3 +13,27 @@
   word-spacing: 3px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
+#inputForms {
+  border-top: 15px solid black;
+  margin-top: 40px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+#get-violinist-select {
+  height: 2rem;
+  margin-top: 25px;
+}
+
+#get-violinist-select option {
+  text-align: center;
+}
+
+#get-vln-by-id-btn {
+  height: 3rem;
+}
+
+#delete-violinist-by-id {
+  height: 3rem;
+}
