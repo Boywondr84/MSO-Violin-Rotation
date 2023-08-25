@@ -43,13 +43,17 @@ let violinDataByID = [];
 const GET_MSO_VIOLINIST = document.getElementById("get-violinist-select");
 const GET_MSO_DATA = document.querySelector(".getID");
 
+// display violin data dynamically
+const VLN_FULL_NAME = document.getElementById("fullName");
+const VLN_ADJUSTED_ROTATION = document.getElementById("adjustedRotation");
+
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
   snapshot.docs.forEach((doc) => {
     violinistsData.push({ ...doc.data(), id: doc.id });
   });
   for (let i = 1; i <= violinistsData.length; i++) {
-    // console.log(violinistsData[1]);
+    // console.log(violinistsData[i].adjRotation);
 
     // Violinists sorted by position
     const SORTVIOLINS = violinistsData;
@@ -57,12 +61,22 @@ getDocs(COLREF).then((snapshot) => {
       return a.position - b.position;
     });
 
-    // get form pull names from DB and uses ID values to submit for data retrieval
-    // get by id form action begins at line
+    // Fetch form pulls names from DB and uses ID values to submit for data retrieval
+    // get by id form action begins at line 111
     let getSelectedViolinist = document.createElement("option");
     getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
     getSelectedViolinist.value = violinistsData[i].id;
     GET_MSO_VIOLINIST.appendChild(getSelectedViolinist);
+
+    // variables to dynamically create 'td' in DB display
+    let fullViolinName = document.createElement("tr");
+    let fullViolinAdjRotation = document.createElement("tr");
+
+    fullViolinName.innerHTML = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
+    VLN_FULL_NAME.appendChild(fullViolinName);
+
+    fullViolinAdjRotation.innerHTML = violinistsData[i].adjRotation;
+    VLN_ADJUSTED_ROTATION.appendChild(fullViolinAdjRotation);
   }
 });
 

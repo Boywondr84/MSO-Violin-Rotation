@@ -69,3 +69,12 @@
 #delete-violinist-by-id {
   height: 3rem;
 }
+
+.table th {
+  text-align: center;
+}
+
+.table tr {
+  font-size: 20px;
+  height: 50px;
+}
