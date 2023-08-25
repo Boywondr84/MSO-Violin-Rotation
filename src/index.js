@@ -10,6 +10,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  addDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -35,18 +36,13 @@ let violinistsData = [{}];
 const GET_MSO_VIOLINIST = document.getElementById("get-violinist-select");
 const GET_MSO_DATA = document.querySelector(".getID");
 
-// delete violinist
-// const DELETE_VIOLINIST_BY_ID = document.getElementById(
-//   "delete-violinist-by-id"
-// );
-
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
   snapshot.docs.forEach((doc) => {
     violinistsData.push({ ...doc.data(), id: doc.id });
   });
   for (let i = 1; i <= violinistsData.length; i++) {
-    console.log(violinistsData[1]);
+    // console.log(violinistsData[1]);
 
     // Violinists sorted by position
     const SORTVIOLINS = violinistsData;
@@ -61,6 +57,24 @@ getDocs(COLREF).then((snapshot) => {
     getSelectedViolinist.value = violinistsData[i].id;
     GET_MSO_VIOLINIST.appendChild(getSelectedViolinist);
   }
+});
+
+// add a violinist
+const ADD_VIOLINIST_FORM = document.querySelector(".form-group-add");
+ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  addDoc(COLREF, {
+    firstName: ADD_VIOLINIST_FORM.first.value,
+    lastName: ADD_VIOLINIST_FORM.last.value,
+    position: ADD_VIOLINIST_FORM.position.value,
+  }).then(() => {
+    alert(
+      `Violinist ${ADD_VIOLINIST_FORM.first.value} ${ADD_VIOLINIST_FORM.last.value} added successfully!`
+    );
+    ADD_VIOLINIST_FORM.reset();
+    window.location.reload();
+  });
 });
 
 // delete violinist

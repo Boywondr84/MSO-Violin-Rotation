@@ -21,9 +21,12 @@
   margin-right: 2.5%;
 }
 
+#add-vln-btn {
+  height: 3rem;
+}
+
 #get-violinist-select {
   height: 2rem;
-  margin-top: 25px;
 }
 
 #get-violinist-select option {
@@ -36,4 +39,13 @@
 
 #delete-violinist-by-id {
   height: 3rem;
+}
+
+.form-group-add {
+}
+
+.form-group-add input {
+  height: 2rem;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
