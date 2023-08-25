@@ -1,12 +1,13 @@
 #header img {
-  margin-left: 8px;
+  margin-left: 18px;
 }
 
 #header h1 {
   background-color: #2f236b;
   color: white;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 40px;
+  margin-right: 18px;
   padding: 42px 120px 51px 100px;
   text-align: center;
   word-spacing: 3px;
