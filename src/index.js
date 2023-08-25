@@ -78,7 +78,7 @@ ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
 });
 
 // delete violinist
-const DELETE_VIOLINIST = document.querySelector(".getVlnDataById");
+const DELETE_VIOLINIST = document.querySelector(".delete");
 DELETE_VIOLINIST.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -88,4 +88,11 @@ DELETE_VIOLINIST.addEventListener("submit", (event) => {
     alert("Violinist deleted!");
     window.location.reload();
   });
+});
+
+// get data for violinist
+const GET_DATA = document.querySelector(".getVlnDataById");
+GET_DATA.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log("Get Button clicked");
 });

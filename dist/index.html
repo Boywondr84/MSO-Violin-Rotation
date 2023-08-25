@@ -30,16 +30,23 @@
         <button class="btn btn-lg" id="add-vln-btn">Add A Violinist!</button>
       </form>
 
-      <form class="getVlnDataById">
+      <div class="form-group" id="getVln">
         <label for="violinist-data-select">Select A Violinist:</label>
         <select class="getID" id="get-violinist-select" value="" required>
           <option id="get-violinist-select" class="getOption" disabled>
             Select A Violinist to Update
           </option>
         </select>
-        <button class="btn btn-lg btn-success" id="get-vln-by-id-btn">
+        <form class="getVlnDataById">
+        <button
+          class="btn btn-lg btn-success"
+          id="get-vln-by-id-btn"
+          type="submit"
+        >
           Fetch Violinist Data
         </button>
+        </form>
+        <form class="delete">
         <button
           class="btn btn-lg btn-error"
           id="delete-violinist-by-id"
@@ -47,18 +54,8 @@
         >
           Delete Violinist
         </button>
+        </form>
       </form>
-
-      <!-- <form class="form-group-add">
-        <label for="firstName">First Name:</label>
-        <input type="text" name="first" required />
-        <label for="lastName">Last Name:</label>
-        <input type="text" name="last" required />
-        <label for="position">Position:</label>
-        <input type="number" name="position" min="1" max="12" required />
-
-        <button class="btn btn-lg">Add A Violinist!</button>
-      </form> -->
     </div>
 
     <script src="bundle.js"></script>

@@ -14,19 +14,45 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
+/* FORMS */
 #inputForms {
   border-top: 15px solid black;
+  border-bottom: 6px solid black;
   margin-top: 40px;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-bottom: 20px;
 }
 
+/* Add violinist form */
 #add-vln-btn {
   height: 3rem;
 }
 
+.form-group-add {
+  margin-left: 15%;
+}
+
+.form-group-add input {
+  height: 2rem;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+/* get violinist form */
+#getVln {
+  display: inline-flex;
+  margin-left: 20%;
+}
+
+#getVln label {
+  padding-right: 0.5em;
+  margin-top: 19px;
+}
+
 #get-violinist-select {
   height: 2rem;
+  margin-top: 10px;
 }
 
 #get-violinist-select option {
@@ -35,17 +61,11 @@
 
 #get-vln-by-id-btn {
   height: 3rem;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
+/* delete violinist form */
 #delete-violinist-by-id {
   height: 3rem;
-}
-
-.form-group-add {
-}
-
-.form-group-add input {
-  height: 2rem;
-  margin-top: 25px;
-  margin-bottom: 20px;
 }
