@@ -151,6 +151,10 @@ getDocs(COLREF).then((snapshot) => {
     } else {
       fullViolinRotation.innerHTML = "None";
     }
+    // rotation background color changes based on count
+    if (violinistsData[i].rotationTime >= 12) {
+      fullViolinRotation.setAttribute("class", "Danger");
+    }
     VLN_ROTATION.appendChild(fullViolinRotation);
 
     fullViolinMinutes.innerHTML = violinistsData[i].minutesTime;
@@ -206,6 +210,8 @@ GET_DATA.addEventListener("submit", (event) => {
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
     // console.log(violinDataByID[0]);
+
+    // Player DB data displayed in update form
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
     VLN_DATA_DISPLAY_NAME.innerHTML = `Data for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
 
@@ -249,7 +255,7 @@ UPDATE_VLN_FORM.addEventListener("submit", (event) => {
     rnocTime: UPDATE_VLN_FORM.rnocTime.value,
     onCallTime: UPDATE_VLN_FORM.onCallTime.value,
     rotationTime: UPDATE_VLN_FORM.rotationTime.value,
-    minutesTimes: UPDATE_VLN_FORM.minutesTime.value,
+    minutesTime: UPDATE_VLN_FORM.minutesTime.value,
   }).then(() => {
     alert(
       `Data Updated for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}`

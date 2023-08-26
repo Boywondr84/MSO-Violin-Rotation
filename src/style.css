@@ -79,6 +79,9 @@
   display: none;
 }
 
+.Danger {
+  background-color: rgb(65, 243, 65);
+}
 /* UPDATE Form */
 .updateVlnData {
   margin-top: 30px;
