@@ -51,6 +51,10 @@ const VLN_ON_CALL = document.getElementById("onCall");
 const VLN_ROTATION = document.getElementById("rotation");
 const VLN_MINUTES = document.getElementById("minutes");
 
+// fetch single violinists' db data
+const VLN_DATA_DISPLAY = document.querySelector(".updateVlnData");
+const VLN_DATA_DISPLAY_NAME = document.getElementById("displayName");
+
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
   snapshot.docs.forEach((doc) => {
@@ -132,5 +136,7 @@ GET_DATA.addEventListener("submit", (event) => {
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
     // console.log(violinDataByID[0]);
+    VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
+    VLN_DATA_DISPLAY_NAME.innerHTML = `Data for: ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
   });
 });
