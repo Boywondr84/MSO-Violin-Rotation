@@ -12,6 +12,7 @@ import {
   deleteDoc,
   doc,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -51,7 +52,7 @@ const VLN_ON_CALL = document.getElementById("onCall");
 const VLN_ROTATION = document.getElementById("rotation");
 const VLN_MINUTES = document.getElementById("minutes");
 
-// fetch single violinists' db data
+// fetch & update single violinists' db data
 const VLN_DATA_DISPLAY = document.querySelector(".updateVlnData");
 const VLN_DATA_DISPLAY_NAME = document.getElementById("displayName");
 const VLN_DATA_ADJ_ROTATION_EL = document.getElementById("adjRotationEl");
@@ -75,7 +76,7 @@ getDocs(COLREF).then((snapshot) => {
     });
 
     // Fetch form pulls names from DB and uses ID values to submit for data retrieval
-    // get by id form action begins at line 111
+    // get by id form action begins at line 198
     let getSelectedViolinist = document.createElement("option");
     getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
     getSelectedViolinist.value = violinistsData[i].id;
@@ -89,14 +90,78 @@ getDocs(COLREF).then((snapshot) => {
     let fullViolinRotation = document.createElement("tr");
     let fullViolinMinutes = document.createElement("tr");
 
+    // dynamically displayed DB data to DOM table
     fullViolinName.innerHTML = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
     VLN_FULL_NAME.appendChild(fullViolinName);
 
     fullViolinAdjRotation.innerHTML = violinistsData[i].adjRotation;
+    if (
+      (violinistsData[i].adjRotation > 0 &&
+        violinistsData[i].adjRotation <= 1) ||
+      (violinistsData[i].adjRotation < 0 && violinistsData[i].adjRotation >= -1)
+    ) {
+      fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} service`;
+    } else if (
+      violinistsData[i].adjRotation <= 0 ||
+      violinistsData[i].adjRotation > 1
+    ) {
+      fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} services`;
+    } else {
+      fullViolinAdjRotation.innerHTML = "None";
+    }
     VLN_ADJUSTED_ROTATION.appendChild(fullViolinAdjRotation);
 
-    fullViolinRNOC.innerHTML = violinistsData[i].rnoc;
+    fullViolinRNOC.innerHTML = violinistsData[i].rnocTime;
+    if (violinistsData[i].rnocTime > 0 && violinistsData[i].rnocTime <= 1) {
+      fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} service`;
+    } else if (
+      violinistsData[i].rnocTime == 0 ||
+      violinistsData[i].rnocTime > 1
+    ) {
+      fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} services`;
+    } else {
+      fullViolinRNOC.innerHTML = "None";
+    }
     VLN_RNOC.appendChild(fullViolinRNOC);
+
+    fullViolinOnCall.innerHTML = violinistsData[i].onCallTime;
+    if (violinistsData[i].onCallTime > 0 && violinistsData[i].onCallTime <= 1) {
+      fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} service`;
+    } else if (
+      violinistsData[i].onCallTime == 0 ||
+      violinistsData[i].onCallTime > 1
+    ) {
+      fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} services`;
+    } else {
+      fullViolinOnCall.innerHTML = "None";
+    }
+    VLN_ON_CALL.appendChild(fullViolinOnCall);
+
+    fullViolinRotation.innerHTML = violinistsData[i].rotationTime;
+    if (
+      violinistsData[i].rotationTime > 0 &&
+      violinistsData[i].rotationTime <= 1
+    ) {
+      fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} service`;
+    } else if (
+      violinistsData[i].rotationTime == 0 ||
+      violinistsData[i].rotationTime > 1
+    ) {
+      fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} services`;
+    } else {
+      fullViolinRotation.innerHTML = "None";
+    }
+    VLN_ROTATION.appendChild(fullViolinRotation);
+
+    fullViolinMinutes.innerHTML = violinistsData[i].minutesTime;
+    if (violinistsData[i].minutesTime == 1) {
+      fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minute`;
+    } else if (violinistsData[i].minutesTime > 1) {
+      fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minutes`;
+    } else {
+      fullViolinMinutes.innerHTML = "None";
+    }
+    VLN_MINUTES.appendChild(fullViolinMinutes);
   }
 });
 
@@ -142,7 +207,7 @@ GET_DATA.addEventListener("submit", (event) => {
     violinDataByID.push({ ...doc.data() });
     // console.log(violinDataByID[0]);
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
-    VLN_DATA_DISPLAY_NAME.innerHTML = `Data for: ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
+    VLN_DATA_DISPLAY_NAME.innerHTML = `Data for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
 
     VLN_DATA_ADJ_ROTATION_EL.value = violinDataByID[0].adjRotation;
     if (!VLN_DATA_ADJ_ROTATION_EL.value) {
@@ -168,5 +233,33 @@ GET_DATA.addEventListener("submit", (event) => {
     if (!VLN_DATA_MINUTES_EL.value) {
       VLN_DATA_MINUTES_EL.value = 0;
     }
+
+    // loop over player leave data here
   });
+});
+
+const UPDATE_VLN_FORM = document.querySelector(".updateVlnData");
+UPDATE_VLN_FORM.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const DOCREF = doc(DB, "Violinists", violinFormId[0]);
+
+  updateDoc(DOCREF, {
+    adjRotation: UPDATE_VLN_FORM.adjRotation.value,
+    rnocTime: UPDATE_VLN_FORM.rnocTime.value,
+    onCallTime: UPDATE_VLN_FORM.onCallTime.value,
+    rotationTime: UPDATE_VLN_FORM.rotationTime.value,
+    minutesTimes: UPDATE_VLN_FORM.minutesTime.value,
+  }).then(() => {
+    alert(
+      `Data Updated for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}`
+    );
+    window.location.reload();
+  });
+});
+
+// Reset button
+const BTN_RESET = document.getElementById("reset");
+BTN_RESET.addEventListener("click", function () {
+  windowResetBtn = window.location.reload();
 });
