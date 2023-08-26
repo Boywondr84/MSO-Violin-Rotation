@@ -46,6 +46,10 @@ const GET_MSO_DATA = document.querySelector(".getID");
 // display violin data dynamically
 const VLN_FULL_NAME = document.getElementById("fullName");
 const VLN_ADJUSTED_ROTATION = document.getElementById("adjustedRotation");
+const VLN_RNOC = document.getElementById("rnoc");
+const VLN_ON_CALL = document.getElementById("onCall");
+const VLN_ROTATION = document.getElementById("rotation");
+const VLN_MINUTES = document.getElementById("minutes");
 
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
@@ -71,12 +75,19 @@ getDocs(COLREF).then((snapshot) => {
     // variables to dynamically create 'td' in DB display
     let fullViolinName = document.createElement("tr");
     let fullViolinAdjRotation = document.createElement("tr");
+    let fullViolinRNOC = document.createElement("tr");
+    let fullViolinOnCall = document.createElement("tr");
+    let fullViolinRotation = document.createElement("tr");
+    let fullViolinMinutes = document.createElement("tr");
 
     fullViolinName.innerHTML = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
     VLN_FULL_NAME.appendChild(fullViolinName);
 
     fullViolinAdjRotation.innerHTML = violinistsData[i].adjRotation;
     VLN_ADJUSTED_ROTATION.appendChild(fullViolinAdjRotation);
+
+    fullViolinRNOC.innerHTML = violinistsData[i].rnoc;
+    VLN_RNOC.appendChild(fullViolinRNOC);
   }
 });
 
