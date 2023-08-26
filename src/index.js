@@ -54,6 +54,11 @@ const VLN_MINUTES = document.getElementById("minutes");
 // fetch single violinists' db data
 const VLN_DATA_DISPLAY = document.querySelector(".updateVlnData");
 const VLN_DATA_DISPLAY_NAME = document.getElementById("displayName");
+const VLN_DATA_ADJ_ROTATION_EL = document.getElementById("adjRotationEl");
+const VLN_DATA_RNOC_EL = document.getElementById("rnocEl");
+const VLN_DATA_ON_CALL_EL = document.getElementById("onCallEl");
+const VLN_DATA_ROTATION_EL = document.getElementById("rotationEl");
+const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 
 // get all collection data
 getDocs(COLREF).then((snapshot) => {
@@ -138,5 +143,30 @@ GET_DATA.addEventListener("submit", (event) => {
     // console.log(violinDataByID[0]);
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
     VLN_DATA_DISPLAY_NAME.innerHTML = `Data for: ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
+
+    VLN_DATA_ADJ_ROTATION_EL.value = violinDataByID[0].adjRotation;
+    if (!VLN_DATA_ADJ_ROTATION_EL.value) {
+      VLN_DATA_ADJ_ROTATION_EL.value = 0;
+    }
+
+    VLN_DATA_RNOC_EL.value = violinDataByID[0].rnocTime;
+    if (!VLN_DATA_RNOC_EL.value) {
+      VLN_DATA_RNOC_EL.value = 0;
+    }
+
+    VLN_DATA_ON_CALL_EL.value = violinDataByID[0].onCallTime;
+    if (!VLN_DATA_ON_CALL_EL.value) {
+      VLN_DATA_ON_CALL_EL.value = 0;
+    }
+
+    VLN_DATA_ROTATION_EL.value = violinDataByID[0].rotationTime;
+    if (!VLN_DATA_ROTATION_EL.value) {
+      VLN_DATA_ROTATION_EL.value = 0;
+    }
+
+    VLN_DATA_MINUTES_EL.value = violinDataByID[0].minutesTime;
+    if (!VLN_DATA_MINUTES_EL.value) {
+      VLN_DATA_MINUTES_EL.value = 0;
+    }
   });
 });
