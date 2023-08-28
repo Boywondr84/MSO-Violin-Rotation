@@ -61,7 +61,7 @@
     <!-- Update Single Violinists' Data -->
     <div>
         <form class="updateVlnData" id="hidden">
-            <button class="btn btn-lg" id="reset">Exit Form</button>
+            <button class="btn btn-lg" id="reset">Close Form</button>
             <button class="btn btn-lg" id="updateVlnBtn">Save Data</button>
 
             <div id="dataDisplay" class="dataDisplay">
@@ -78,9 +78,41 @@
                 <input type="number" id="minutesEl" name="minutesTime">
             </div>
         </form>
+
+        <!-- Modal to Submit Rotation Requests -->
+        <button class="btn btn-lg" id="requestForm">Open Leave Form</button>
+            <div class="modal" id="modal-id">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <button class="btn btn-clear" id="closeModal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                            <label class="form-label" for="leaveDate">Date of Leave:</label>
+                            <input class="form-input" type="date" id="leaveDate" name="playerLeaveDate" required>
+                            </div>
+                            <div class="form-group">
+                            <label class="form-label" for="leaveType">Type of Leave:</label>
+                            <select class="form-select" id="typeLeave" name="typeLeave">
+                                <option value="OnCall1">On Call 1</option>
+                                <option value="OnCall2">On Call 2</option>
+                                <option value="NotOnCall">Not On Call</option>
+                            </select>
+                            </div>
+                            <div class="form-group">
+                            <label class="form-label" for="leaveMessage">Notes:</label>
+                            <textarea class="form-input" id="message" name="vlnLeaveMessage" placeholder="Add a note" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-lg" id="leaveSave">Save Leave</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Dynamically displayed data from DB of all violinists -->
+    <div class="table-display">
     <table class="table">
       <thead>
         <tr>
@@ -104,6 +136,7 @@
         </div>
       </tbody>
     </table>
+    </div>
 
     <script src="bundle.js"></script>
   </body>

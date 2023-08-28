@@ -61,113 +61,109 @@ const VLN_DATA_ON_CALL_EL = document.getElementById("onCallEl");
 const VLN_DATA_ROTATION_EL = document.getElementById("rotationEl");
 const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 
+// modal
+const MODAL_OPEN = document.getElementById("modal-id");
+
 // get all collection data
-getDocs(COLREF).then((snapshot) => {
-  snapshot.docs.forEach((doc) => {
-    violinistsData.push({ ...doc.data(), id: doc.id });
-  });
-  for (let i = 1; i <= violinistsData.length; i++) {
-    // console.log(violinistsData[i].adjRotation);
-
-    // Violinists sorted by position
-    const SORTVIOLINS = violinistsData;
-    SORTVIOLINS.sort((a, b) => {
-      return a.position - b.position;
+getDocs(COLREF)
+  .then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      violinistsData.push({ ...doc.data(), id: doc.id });
     });
+    for (let i = 1; i <= violinistsData.length; i++) {
+      // console.log(violinistsData[i].adjRotation);
 
-    // Fetch form pulls names from DB and uses ID values to submit for data retrieval
-    // get by id form action begins at line 198
-    let getSelectedViolinist = document.createElement("option");
-    getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
-    getSelectedViolinist.value = violinistsData[i].id;
-    GET_MSO_VIOLINIST.appendChild(getSelectedViolinist);
+      // Violinists sorted by position
+      const SORTVIOLINS = violinistsData;
+      SORTVIOLINS.sort((a, b) => {
+        return a.position - b.position;
+      });
 
-    // variables to dynamically create 'td' in DB display
-    let fullViolinName = document.createElement("tr");
-    let fullViolinAdjRotation = document.createElement("tr");
-    let fullViolinRNOC = document.createElement("tr");
-    let fullViolinOnCall = document.createElement("tr");
-    let fullViolinRotation = document.createElement("tr");
-    let fullViolinMinutes = document.createElement("tr");
+      // Fetch form pulls names from DB and uses ID values to submit for data retrieval
+      // get by id form action begins at line 198
+      let getSelectedViolinist = document.createElement("option");
+      getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
+      getSelectedViolinist.value = violinistsData[i].id;
+      GET_MSO_VIOLINIST.appendChild(getSelectedViolinist);
 
-    // dynamically displayed DB data to DOM table
-    fullViolinName.innerHTML = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
-    VLN_FULL_NAME.appendChild(fullViolinName);
+      // variables to dynamically create 'td' in DB display
+      let fullViolinName = document.createElement("tr");
+      let fullViolinAdjRotation = document.createElement("tr");
+      let fullViolinRNOC = document.createElement("tr");
+      let fullViolinOnCall = document.createElement("tr");
+      let fullViolinRotation = document.createElement("tr");
+      let fullViolinMinutes = document.createElement("tr");
 
-    fullViolinAdjRotation.innerHTML = violinistsData[i].adjRotation;
-    if (
-      (violinistsData[i].adjRotation > 0 &&
-        violinistsData[i].adjRotation <= 1) ||
-      (violinistsData[i].adjRotation < 0 && violinistsData[i].adjRotation >= -1)
-    ) {
-      fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} service`;
-    } else if (
-      violinistsData[i].adjRotation <= 0 ||
-      violinistsData[i].adjRotation > 1
-    ) {
-      fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} services`;
-    } else {
-      fullViolinAdjRotation.innerHTML = "None";
+      // dynamically displayed DB data to DOM table
+      fullViolinName.innerHTML = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
+      VLN_FULL_NAME.appendChild(fullViolinName);
+
+      fullViolinAdjRotation.innerHTML = violinistsData[i].adjRotation;
+      if (
+        (violinistsData[i].adjRotation > 0 &&
+          violinistsData[i].adjRotation <= 1) ||
+        (violinistsData[i].adjRotation < 0 &&
+          violinistsData[i].adjRotation >= -1)
+      ) {
+        fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} service`;
+      } else if (
+        violinistsData[i].adjRotation <= 0 ||
+        violinistsData[i].adjRotation > 1
+      ) {
+        fullViolinAdjRotation.innerHTML = `${violinistsData[i].adjRotation} services`;
+      } else {
+        fullViolinAdjRotation.innerHTML = "None";
+      }
+      VLN_ADJUSTED_ROTATION.appendChild(fullViolinAdjRotation);
+
+      fullViolinRNOC.innerHTML = violinistsData[i].rnocTime;
+      if (violinistsData[i].rnocTime == 1) {
+        fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} service`;
+      } else if (violinistsData[i].rnocTime > 1) {
+        fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} services`;
+      } else {
+        fullViolinRNOC.innerHTML = "None";
+      }
+      VLN_RNOC.appendChild(fullViolinRNOC);
+
+      fullViolinOnCall.innerHTML = violinistsData[i].onCallTime;
+      if (violinistsData[i].onCallTime == 1) {
+        fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} service`;
+      } else if (violinistsData[i].onCallTime > 1) {
+        fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} services`;
+      } else {
+        fullViolinOnCall.innerHTML = "None";
+      }
+      VLN_ON_CALL.appendChild(fullViolinOnCall);
+
+      fullViolinRotation.innerHTML = violinistsData[i].rotationTime;
+      if (violinistsData[i].rotationTime == 1) {
+        fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} service`;
+      } else if (violinistsData[i].rotationTime > 1) {
+        fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} services`;
+      } else {
+        fullViolinRotation.innerHTML = "None";
+      }
+      // rotation background color changes based on count
+      if (violinistsData[i].rotationTime >= 12) {
+        fullViolinRotation.setAttribute("class", "Danger");
+      }
+      VLN_ROTATION.appendChild(fullViolinRotation);
+
+      fullViolinMinutes.innerHTML = violinistsData[i].minutesTime;
+      if (violinistsData[i].minutesTime == 1) {
+        fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minute`;
+      } else if (violinistsData[i].minutesTime > 1) {
+        fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minutes`;
+      } else {
+        fullViolinMinutes.innerHTML = "None";
+      }
+      VLN_MINUTES.appendChild(fullViolinMinutes);
     }
-    VLN_ADJUSTED_ROTATION.appendChild(fullViolinAdjRotation);
-
-    fullViolinRNOC.innerHTML = violinistsData[i].rnocTime;
-    if (violinistsData[i].rnocTime > 0 && violinistsData[i].rnocTime <= 1) {
-      fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} service`;
-    } else if (
-      violinistsData[i].rnocTime == 0 ||
-      violinistsData[i].rnocTime > 1
-    ) {
-      fullViolinRNOC.innerHTML = `${violinistsData[i].rnocTime} services`;
-    } else {
-      fullViolinRNOC.innerHTML = "None";
-    }
-    VLN_RNOC.appendChild(fullViolinRNOC);
-
-    fullViolinOnCall.innerHTML = violinistsData[i].onCallTime;
-    if (violinistsData[i].onCallTime > 0 && violinistsData[i].onCallTime <= 1) {
-      fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} service`;
-    } else if (
-      violinistsData[i].onCallTime == 0 ||
-      violinistsData[i].onCallTime > 1
-    ) {
-      fullViolinOnCall.innerHTML = `${violinistsData[i].onCallTime} services`;
-    } else {
-      fullViolinOnCall.innerHTML = "None";
-    }
-    VLN_ON_CALL.appendChild(fullViolinOnCall);
-
-    fullViolinRotation.innerHTML = violinistsData[i].rotationTime;
-    if (
-      violinistsData[i].rotationTime > 0 &&
-      violinistsData[i].rotationTime <= 1
-    ) {
-      fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} service`;
-    } else if (
-      violinistsData[i].rotationTime == 0 ||
-      violinistsData[i].rotationTime > 1
-    ) {
-      fullViolinRotation.innerHTML = `${violinistsData[i].rotationTime} services`;
-    } else {
-      fullViolinRotation.innerHTML = "None";
-    }
-    // rotation background color changes based on count
-    if (violinistsData[i].rotationTime >= 12) {
-      fullViolinRotation.setAttribute("class", "Danger");
-    }
-    VLN_ROTATION.appendChild(fullViolinRotation);
-
-    fullViolinMinutes.innerHTML = violinistsData[i].minutesTime;
-    if (violinistsData[i].minutesTime == 1) {
-      fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minute`;
-    } else if (violinistsData[i].minutesTime > 1) {
-      fullViolinMinutes.innerHTML = `${violinistsData[i].minutesTime} minutes`;
-    } else {
-      fullViolinMinutes.innerHTML = "None";
-    }
-    VLN_MINUTES.appendChild(fullViolinMinutes);
-  }
-});
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // add a violinist
 const ADD_VIOLINIST_FORM = document.querySelector(".form-group-add");
@@ -267,5 +263,16 @@ UPDATE_VLN_FORM.addEventListener("submit", (event) => {
 // Reset button
 const BTN_RESET = document.getElementById("reset");
 BTN_RESET.addEventListener("click", function () {
-  windowResetBtn = window.location.reload();
+  window.location.reload();
+});
+
+let leaveBtn = document.getElementById("requestForm");
+leaveBtn.addEventListener("click", function () {
+  MODAL_OPEN.setAttribute("class", "active");
+});
+
+let leaveBtnClose = document.getElementById("closeModal");
+leaveBtnClose.addEventListener("click", function () {
+  MODAL_OPEN.style.display = "none";
+  window.location.reload();
 });
