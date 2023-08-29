@@ -114,7 +114,6 @@
 }
 
 .modal {
-  display: none;
   align-items: center;
   position: fixed;
   /* position: absolute;
@@ -132,7 +131,7 @@
 
 .modal-container {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
   height: 50%;
   max-width: 80%;

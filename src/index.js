@@ -62,7 +62,7 @@ const VLN_DATA_ROTATION_EL = document.getElementById("rotationEl");
 const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 
 // modal
-const MODAL_OPEN = document.getElementById("modal-id");
+const MODAL_OPEN = document.querySelector(".modal");
 
 // get all collection data
 getDocs(COLREF)
@@ -268,11 +268,11 @@ BTN_RESET.addEventListener("click", function () {
 
 let leaveBtn = document.getElementById("requestForm");
 leaveBtn.addEventListener("click", function () {
-  MODAL_OPEN.setAttribute("class", "active");
+  MODAL_OPEN.classList.add("active");
 });
 
 let leaveBtnClose = document.getElementById("closeModal");
 leaveBtnClose.addEventListener("click", function () {
-  MODAL_OPEN.style.display = "none";
-  window.location.reload();
+  MODAL_OPEN.classList.remove("active");
+  // window.location.reload();
 });
