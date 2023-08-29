@@ -295,3 +295,5 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
   });
   window.alert("Leave submitted successfully!");
 });
+
+// dynamically display any leave data

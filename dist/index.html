@@ -110,40 +110,54 @@
                     type="submit">
                     Save Leave
                 </button>
-           </form>
+            </form>
         </div>
-        <div class="modal-body" id="leaveDB">
-            <div class="modal-title">Return leave data from DB here:</div>
+        <div class="tabledisplay">
+            <table class="table" id="leaveDB">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Leave</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10/10</td>
+                        <td>Not On Call</td>
+                        <td>Opera Rehearsal</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
     <!-- Dynamically displayed data from DB of all violinists -->
-    <div class="table-display">
+<div class="table-display">
     <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Adjusted Rotation</th>
-          <th>RNOC</th>
-          <th>On Call Count</th>
-          <th>Rotation</th>
-          <th>Minutes(rot.)</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td id="fullName"></td>
-            <td id="adjustedRotation"></td>
-            <td id="rnoc"></td>
-            <td id="onCall"></td>
-            <td id="rotation"></td>
-            <td id="minutes"></td>
-          </tr>
-        </div>
-      </tbody>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Adjusted Rotation</th>
+                <th>RNOC</th>
+                <th>On Call Count</th>
+                <th>Rotation</th>
+                <th>Minutes(rot.)</th>
+            </tr>
+        </thead>
+    <tbody>
+            <tr>
+                <td id="fullName"></td>
+                <td id="adjustedRotation"></td>
+                <td id="rnoc"></td>
+                <td id="onCall"></td>
+                <td id="rotation"></td>
+                <td id="minutes"></td>
+            </tr>
+    </tbody>
     </table>
-    </div>
+</div>
 
     <script src="bundle.js"></script>
   </body>
