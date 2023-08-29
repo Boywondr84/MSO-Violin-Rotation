@@ -122,35 +122,36 @@
 .modal {
   align-items: center;
   position: fixed;
-  /* position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  z-index: 2;
-  padding-top: 100px;
-  height: 85%;
-  width: 99%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.modal .form-group {
+  margin-right: 14%;
 }
 
 .modal-container {
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.4); */
   box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
-  height: 50%;
+  height: 63%;
   max-width: 80%;
+}
+
+.modal-container .modal-body {
+  width: 82%;
 }
 
 #closeModal {
   margin-left: 800px;
 }
 
-.modal-body {
-  display: inline-flex;
+#leaveForm {
+  display: flex;
+  flex-direction: row;
 }
 
-.form-input {
-  margin-right: 20px;
+#leave-data {
+  display: inline-block;
+}
+
+#leaveSave {
+  margin-top: 32.62%;
 }

@@ -13,6 +13,7 @@ import {
   doc,
   addDoc,
   updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -184,6 +185,7 @@ ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
 });
 
 // delete violinist
+// add a confirmation note before deleting
 const DELETE_VIOLINIST = document.querySelector(".delete");
 DELETE_VIOLINIST.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -275,4 +277,21 @@ leaveBtn.addEventListener("click", function (event) {
 let leaveBtnClose = document.getElementById("closeModal");
 leaveBtnClose.addEventListener("click", function () {
   MODAL_OPEN.classList.remove("active");
+});
+
+// Modal save
+const ADD_LEAVE_FORM = document.querySelector(".leave-data");
+ADD_LEAVE_FORM.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const DOCREF = doc(DB, "Violinists", violinFormId[0]);
+
+  updateDoc(DOCREF, {
+    leave: arrayUnion({
+      date: leaveDate.value,
+      type: leaveType.value,
+      message: leaveMessage.value,
+    }),
+  });
+  window.alert("Leave submitted successfully!");
 });
