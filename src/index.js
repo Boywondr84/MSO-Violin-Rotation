@@ -267,12 +267,12 @@ BTN_RESET.addEventListener("click", function () {
 });
 
 let leaveBtn = document.getElementById("requestForm");
-leaveBtn.addEventListener("click", function () {
+leaveBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   MODAL_OPEN.classList.add("active");
 });
 
 let leaveBtnClose = document.getElementById("closeModal");
 leaveBtnClose.addEventListener("click", function () {
   MODAL_OPEN.classList.remove("active");
-  // window.location.reload();
 });

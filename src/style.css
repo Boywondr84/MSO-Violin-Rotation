@@ -108,9 +108,15 @@
   display: inline-flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-left: 12px;
+  margin-left: 31px;
   margin-top: 6px;
+  margin-bottom: 38px;
   font-size: 20px;
+}
+
+.updateBtns {
+  display: inline-block;
+  margin-left: 34%;
 }
 
 .modal {
@@ -131,12 +137,10 @@
 
 .modal-container {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
   box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
   height: 50%;
   max-width: 80%;
-  margin-left: 10%;
-  margin-top: 24px;
 }
 
 #closeModal {
@@ -145,4 +149,8 @@
 
 .modal-body {
   display: inline-flex;
+}
+
+.form-input {
+  margin-right: 20px;
 }

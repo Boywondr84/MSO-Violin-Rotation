@@ -61,9 +61,6 @@
     <!-- Update Single Violinists' Data -->
     <div>
         <form class="updateVlnData" id="hidden">
-            <button class="btn btn-lg" id="reset">Close Form</button>
-            <button class="btn btn-lg" id="updateVlnBtn">Save Data</button>
-
             <div id="dataDisplay" class="dataDisplay">
                 <p id="displayName"></p>
                 <p>Adjusted Rotation:</p>
@@ -77,10 +74,15 @@
                 <p>Minutes:</p>
                 <input type="number" id="minutesEl" name="minutesTime">
             </div>
+            <div class="updateBtns">
+                <button class="btn btn-lg" id="requestForm">Open Leave Form</button>
+                <button class="btn btn-lg" id="reset">Close Form</button>
+                <button class="btn btn-lg" id="updateVlnBtn">Save Data</button>
+            </div>
         </form>
 
         <!-- Modal to Submit Rotation Requests -->
-        <button class="btn btn-lg" id="requestForm">Open Leave Form</button>
+        <!-- <button class="btn btn-lg" id="requestForm">Open Leave Form</button> -->
             <div class="modal" id="modal-id">
                 <div class="modal-container">
                     <div class="modal-header">
