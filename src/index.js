@@ -69,7 +69,7 @@ const MODAL_OPEN = document.querySelector(".modal");
 const GET_LEAVE_DATE = document.getElementById("leaveDateDB");
 const GET_LEAVE_TYPE = document.getElementById("leaveTypeDB");
 const GET_LEAVE_NOTES = document.getElementById("leaveNotesDB");
-// const EDIT_LEAVE_BTN = document.getElementById("leaveEditBtn");
+const DELETE_LEAVE = document.getElementById("leaveDelete");
 
 // get all collection data
 getDocs(COLREF)
@@ -261,12 +261,15 @@ GET_DATA.addEventListener("submit", (event) => {
       let fullViolinLeaveNote = document.createElement("tr");
       fullViolinLeaveNote.innerHTML = playerLeave[i].message;
       GET_LEAVE_NOTES.appendChild(fullViolinLeaveNote);
+
+      let violinLeaveDelete = document.createElement("tr");
+      violinLeaveDelete.classList.add("btn");
+      violinLeaveDelete.innerHTML = "Delete";
+      DELETE_LEAVE.appendChild(violinLeaveDelete);
+
+      //delete by event.target.id??
+      // console.log(violinLeaveDelete);
     }
-    // if (playerLeave[i].date) {
-    //   let violinLeaveEdit = document.createElement("button");
-    //   // violinLeaveEdit.text = "Edit";
-    //   EDIT_LEAVE_BTN.appendChild(violinLeaveEdit);
-    // }
   });
 });
 

@@ -146,7 +146,7 @@
 #leaveForm {
   display: flex;
   flex-direction: row;
-  min-height: 25%;
+  min-height: 26%;
 }
 
 #leave-data {
@@ -160,4 +160,16 @@
 #leaveDB {
   margin-top: 10%;
   align-items: center;
+}
+
+#leaveDelete {
+  display: flex;
+  flex-direction: column;
+}
+
+.table tr .btn {
+  margin-bottom: 10px;
+  height: 40px;
+  color: red;
+  border-color: rgb(104, 1, 1);
 }

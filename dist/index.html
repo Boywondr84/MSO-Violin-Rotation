@@ -27,14 +27,17 @@
         <label for="position">Position:</label>
         <input type="number" name="position" min="1" max="12" required />
 
-        <button class="btn btn-lg" id="add-vln-btn">Add A Violinist!</button>
+        <button class="btn btn-lg" 
+          id="add-vln-btn">
+          Add A Violinist!
+        </button>
       </form>
 
       <div class="form-group" id="getVln">
         <label for="violinist-data-select">Select A Violinist:</label>
         <select class="getID" id="get-violinist-select" value="" required>
           <option id="get-violinist-select" class="getOption" disabled>
-            Select A Violinist to Update
+            Select A Violinist
           </option>
         </select>
         <form class="getVlnData">
@@ -126,6 +129,7 @@
                         <td id="leaveDateDB"></td>
                         <td id="leaveTypeDB"></td>
                         <td id="leaveNotesDB"></td>
+                        <td id="leaveDelete"></td>
                     </tr>
                 </tbody>
             </table>
