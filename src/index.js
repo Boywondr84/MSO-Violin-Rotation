@@ -65,6 +65,12 @@ const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 // modal
 const MODAL_OPEN = document.querySelector(".modal");
 
+// dynamically display any leave data
+const GET_LEAVE_DATE = document.getElementById("leaveDateDB");
+const GET_LEAVE_TYPE = document.getElementById("leaveTypeDB");
+const GET_LEAVE_NOTES = document.getElementById("leaveNotesDB");
+// const EDIT_LEAVE_BTN = document.getElementById("leaveEditBtn");
+
 // get all collection data
 getDocs(COLREF)
   .then((snapshot) => {
@@ -207,7 +213,7 @@ GET_DATA.addEventListener("submit", (event) => {
 
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
-    // console.log(violinDataByID[0]);
+    // console.log(violinDataByID[0].leave[0].date);
 
     // Player DB data displayed in update form
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
@@ -239,6 +245,28 @@ GET_DATA.addEventListener("submit", (event) => {
     }
 
     // loop over player leave data here
+    let playerLeave = violinDataByID[0].leave;
+    for (let i = 0; i < playerLeave.length; i++) {
+      // console.log(playerLeave);
+
+      // dynamically create 'td' in Modal display
+      let fullViolinLeaveDate = document.createElement("tr");
+      fullViolinLeaveDate.innerHTML = playerLeave[i].date;
+      GET_LEAVE_DATE.appendChild(fullViolinLeaveDate);
+
+      let fullViolinLeaveType = document.createElement("tr");
+      fullViolinLeaveType.innerHTML = playerLeave[i].type;
+      GET_LEAVE_TYPE.appendChild(fullViolinLeaveType);
+
+      let fullViolinLeaveNote = document.createElement("tr");
+      fullViolinLeaveNote.innerHTML = playerLeave[i].message;
+      GET_LEAVE_NOTES.appendChild(fullViolinLeaveNote);
+    }
+    // if (playerLeave[i].date) {
+    //   let violinLeaveEdit = document.createElement("button");
+    //   // violinLeaveEdit.text = "Edit";
+    //   EDIT_LEAVE_BTN.appendChild(violinLeaveEdit);
+    // }
   });
 });
 
@@ -295,5 +323,3 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
   });
   window.alert("Leave submitted successfully!");
 });
-
-// dynamically display any leave data

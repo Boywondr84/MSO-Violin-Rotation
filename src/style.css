@@ -131,7 +131,7 @@
 .modal-container {
   align-items: center;
   box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
-  height: 63%;
+  height: 90%;
   max-width: 80%;
 }
 
@@ -146,6 +146,7 @@
 #leaveForm {
   display: flex;
   flex-direction: row;
+  min-height: 25%;
 }
 
 #leave-data {
@@ -158,4 +159,5 @@
 
 #leaveDB {
   margin-top: 10%;
+  align-items: center;
 }
