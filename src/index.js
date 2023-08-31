@@ -10,6 +10,7 @@ import {
   getDocs,
   getDoc,
   deleteDoc,
+  deleteField,
   doc,
   addDoc,
   updateDoc,
@@ -78,7 +79,7 @@ getDocs(COLREF)
       violinistsData.push({ ...doc.data(), id: doc.id });
     });
     for (let i = 1; i <= violinistsData.length; i++) {
-      // console.log(violinistsData[i].adjRotation);
+      // console.log(violinistsData[i].leave);
 
       // Violinists sorted by position
       const SORTVIOLINS = violinistsData;
@@ -87,7 +88,7 @@ getDocs(COLREF)
       });
 
       // Fetch form pulls names from DB and uses ID values to submit for data retrieval
-      // get by id form action begins at line 198
+      // get by id form action begins at line 208
       let getSelectedViolinist = document.createElement("option");
       getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
       getSelectedViolinist.value = violinistsData[i].id;
@@ -213,7 +214,7 @@ GET_DATA.addEventListener("submit", (event) => {
 
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
-    // console.log(violinDataByID[0].leave[0].date);
+    // console.log(violinDataByID);
 
     // Player DB data displayed in update form
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
@@ -244,12 +245,15 @@ GET_DATA.addEventListener("submit", (event) => {
       VLN_DATA_MINUTES_EL.value = 0;
     }
 
+    // Modal table
+
     // loop over player leave data here
     let playerLeave = violinDataByID[0].leave;
     for (let i = 0; i < playerLeave.length; i++) {
-      // console.log(playerLeave);
+      // let fullViolinLeaveDelete = playerLeave;
+      // console.log(violinDataByID[0].leave);
 
-      // dynamically create 'td' in Modal display
+      // dynamically create 'tr' in Modal display
       let fullViolinLeaveDate = document.createElement("tr");
       fullViolinLeaveDate.innerHTML = playerLeave[i].date;
       GET_LEAVE_DATE.appendChild(fullViolinLeaveDate);
@@ -262,13 +266,20 @@ GET_DATA.addEventListener("submit", (event) => {
       fullViolinLeaveNote.innerHTML = playerLeave[i].message;
       GET_LEAVE_NOTES.appendChild(fullViolinLeaveNote);
 
-      let violinLeaveDelete = document.createElement("tr");
+      let violinLeaveDelete = document.createElement("tr", "button");
       violinLeaveDelete.classList.add("btn");
+      violinLeaveDelete.setAttribute("id", "deleteRow");
       violinLeaveDelete.innerHTML = "Delete";
+      violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`; //plus indexOf or findIndex??;
       DELETE_LEAVE.appendChild(violinLeaveDelete);
-
       //delete by event.target.id??
-      // console.log(violinLeaveDelete);
+      // delete button targets table row and deletes. will need to save
+      // console.log(violinLeaveDelete.value);
+
+      const DELETE_THIS_ROW = document.getElementById("deleteRow");
+      DELETE_THIS_ROW.addEventListener("click", () => {
+        console.log(`button was clicked`);
+      });
     }
   });
 });
