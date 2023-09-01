@@ -214,7 +214,7 @@ GET_DATA.addEventListener("submit", (event) => {
 
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
-    // console.log(violinDataByID);
+    // console.log(violinDataByID[0])
 
     // Player DB data displayed in update form
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
@@ -245,12 +245,13 @@ GET_DATA.addEventListener("submit", (event) => {
       VLN_DATA_MINUTES_EL.value = 0;
     }
 
-    // Modal table
+    // Modal table create dynamically
 
     // loop over player leave data here
     let playerLeave = violinDataByID[0].leave;
     for (let i = 0; i < playerLeave.length; i++) {
-      // let fullViolinLeaveDelete = playerLeave;
+      // console.log(playerLeave);
+      let rowNum = i;
 
       // dynamically create 'tr' in Modal display
       let fullViolinLeaveDate = document.createElement("tr");
@@ -266,21 +267,11 @@ GET_DATA.addEventListener("submit", (event) => {
       GET_LEAVE_NOTES.appendChild(fullViolinLeaveNote);
 
       let violinLeaveDelete = document.createElement("tr", "button");
-      violinLeaveDelete.classList.add("btn");
-      violinLeaveDelete.setAttribute("id", "deleteRow");
+      violinLeaveDelete.classList.add("btn", "deleteRow");
+      violinLeaveDelete.setAttribute("id", `deleteBtn ${rowNum}`);
       violinLeaveDelete.innerHTML = "Delete";
-      violinLeaveDelete.value = `${i} ${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
+      violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
       DELETE_LEAVE.appendChild(violinLeaveDelete);
-      //delete by event.target.id??
-      // playerLeave index added to violinLeaveDelete value (delete) buttons. Need to be able to target
-      // each Delete button separately. Then pass that buttons value to DB to delete??
-      // delete button targets table row and deletes. will need to save
-      console.log(violinLeaveDelete.value);
-
-      const DELETE_THIS_ROW = document.getElementById("deleteRow");
-      DELETE_THIS_ROW.addEventListener("click", () => {
-        console.log("button was clicked");
-      });
     }
   });
 });
@@ -337,4 +328,20 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
     }),
   });
   window.alert("Leave submitted successfully!");
+});
+
+// Modal delete buttons
+
+//delete by event.target.id??
+// playerLeave index added to violinLeaveDelete value (delete) buttons. Need to be able to target
+// each Delete button separately. Then pass that buttons value to DB to delete??
+// delete button targets table row and deletes. will need to save
+// console.log(violinLeaveDelete.value);
+
+const DELETE_THIS_ROW = document.querySelector(".deleteRow");
+// add event listener to each delete button that is created
+DELETE_THIS_ROW.addEventListener("click", (event) => {
+  // console.log("button " + rowNum + " was clicked");
+  event.preventDefault();
+  console.log(event.target.id + " clicked");
 });
