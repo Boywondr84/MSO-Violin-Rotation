@@ -251,7 +251,6 @@ GET_DATA.addEventListener("submit", (event) => {
     let playerLeave = violinDataByID[0].leave;
     for (let i = 0; i < playerLeave.length; i++) {
       // let fullViolinLeaveDelete = playerLeave;
-      // console.log(violinDataByID[0].leave);
 
       // dynamically create 'tr' in Modal display
       let fullViolinLeaveDate = document.createElement("tr");
@@ -270,15 +269,17 @@ GET_DATA.addEventListener("submit", (event) => {
       violinLeaveDelete.classList.add("btn");
       violinLeaveDelete.setAttribute("id", "deleteRow");
       violinLeaveDelete.innerHTML = "Delete";
-      violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`; //plus indexOf or findIndex??;
+      violinLeaveDelete.value = `${i} ${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
       DELETE_LEAVE.appendChild(violinLeaveDelete);
       //delete by event.target.id??
+      // playerLeave index added to violinLeaveDelete value (delete) buttons. Need to be able to target
+      // each Delete button separately. Then pass that buttons value to DB to delete??
       // delete button targets table row and deletes. will need to save
-      // console.log(violinLeaveDelete.value);
+      console.log(violinLeaveDelete.value);
 
       const DELETE_THIS_ROW = document.getElementById("deleteRow");
       DELETE_THIS_ROW.addEventListener("click", () => {
-        console.log(`button was clicked`);
+        console.log("button was clicked");
       });
     }
   });
