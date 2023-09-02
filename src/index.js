@@ -15,6 +15,7 @@ import {
   addDoc,
   updateDoc,
   arrayUnion,
+  FieldValue,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -270,7 +271,7 @@ GET_DATA.addEventListener("submit", (event) => {
       violinLeaveDelete.classList.add("btn", "deleteRow");
       violinLeaveDelete.setAttribute("id", `deleteBtn ${rowNum}`);
       violinLeaveDelete.innerHTML = "Delete";
-      violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
+      // violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
       DELETE_LEAVE.appendChild(violinLeaveDelete);
     }
   });
@@ -326,8 +327,9 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
       type: leaveType.value,
       message: leaveMessage.value,
     }),
+  }).then(() => {
+    alert("Leave submitted successfully!");
   });
-  window.alert("Leave submitted successfully!");
 });
 
 // Modal delete buttons
@@ -343,5 +345,13 @@ const DELETE_THIS_ROW = document.querySelector(".deleteRow");
 DELETE_THIS_ROW.addEventListener("click", (event) => {
   // console.log("button " + rowNum + " was clicked");
   event.preventDefault();
-  console.log(event.target.id + " clicked");
+
+  const DOCREF = doc(DB, "Violinists", violinFormId[0]);
+
+  updateDoc(DOCREF, {
+    leave: deleteField(),
+  }).then(() => {
+    alert("Deleted. Now Save Data");
+  }),
+    console.log(event.target.id + " clicked");
 });
