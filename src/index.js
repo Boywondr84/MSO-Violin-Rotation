@@ -347,12 +347,12 @@ const DELETE_THIS_ROW = document.querySelector(".deleteRow");
 DELETE_THIS_ROW.addEventListener("click", (event) => {
   event.preventDefault();
 
-  const DOCREF = doc(DB, "Violinists", violinFormId[0]);
+  // const DOCREF = doc(DB, "Violinists", violinFormId[0]);
 
-  updateDoc(DOCREF, {
-    leave: deleteField(),
-  }).then(() => {
-    alert("Leave Deleted!");
-  }),
-    console.log(event.target.id + " clicked");
+  // updateDoc(DOCREF, {
+  //   leave: deleteField(),
+  // }).then(() => {
+  //   alert("Leave Deleted!");
+  // }),
+  alert("Delete currently unavailable. Contact admin for manual deletion.");
 });
