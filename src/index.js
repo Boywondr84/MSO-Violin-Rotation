@@ -269,7 +269,7 @@ GET_DATA.addEventListener("submit", (event) => {
 
       let violinLeaveDelete = document.createElement("tr", "button");
       violinLeaveDelete.classList.add("btn", "deleteRow");
-      violinLeaveDelete.setAttribute("id", `deleteBtn ${rowNum}`);
+      violinLeaveDelete.setAttribute("id", `deleteBtn-${rowNum}`);
       violinLeaveDelete.innerHTML = "Delete";
       // violinLeaveDelete.value = `${playerLeave[i].date} ${playerLeave[i].type} ${playerLeave[i].message}`;
       DELETE_LEAVE.appendChild(violinLeaveDelete);
@@ -332,18 +332,9 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
   });
 });
 
-// Modal delete buttons
-
-//delete by event.target.id??
-// playerLeave index added to violinLeaveDelete value (delete) buttons. Need to be able to target
-// each Delete button separately. Then pass that buttons value to DB to delete??
-// delete button targets table row and deletes. will need to save
-// console.log(violinLeaveDelete.value);
-
+// Modal delete buttons - currently deletes all leave data - possible to delete one index at a time?
 const DELETE_THIS_ROW = document.querySelector(".deleteRow");
-// add event listener to each delete button that is created
 DELETE_THIS_ROW.addEventListener("click", (event) => {
-  // console.log("button " + rowNum + " was clicked");
   event.preventDefault();
 
   const DOCREF = doc(DB, "Violinists", violinFormId[0]);
@@ -351,7 +342,7 @@ DELETE_THIS_ROW.addEventListener("click", (event) => {
   updateDoc(DOCREF, {
     leave: deleteField(),
   }).then(() => {
-    alert("Deleted. Now Save Data");
+    alert("Leave Deleted!");
   }),
     console.log(event.target.id + " clicked");
 });
