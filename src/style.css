@@ -174,8 +174,12 @@
   border-color: rgb(104, 1, 1);
 }
 
+#blurTable {
+  filter: blur(3px);
+}
+
 #modal-login-signup {
-  background-color: #46305e;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 #modal-login-signup {
@@ -189,4 +193,8 @@
 
 #modal-login-signup .form-group label {
   margin-top: 15%;
+}
+
+#modal-login-signup .form-group input {
+  margin-top: 20px;
 }

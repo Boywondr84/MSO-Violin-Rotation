@@ -139,7 +139,7 @@
 </div>
 
     <!-- Dynamically displayed data from DB of all violinists -->
-<div class="table-display">
+<div class="table-display" id="blurTable">
     <table class="table">
         <thead>
             <tr>
@@ -176,9 +176,11 @@
           <label class="form-label" for="password">Password</label>
           <input class="form-input" type="text" id="input-password" placeholder="Password" required>
         </div>
-        <div class="loginBtn">
-          <button class="btn btn-lg">Login</button>
-        </div>
+        <form class="loginBtn">
+          <button class="btn btn-lg"
+          type="submit">
+          Login</button>
+        </form>
       </div>
       <div class="divider-vert" data-content="OR"></div>
       <div class="column">
@@ -190,9 +192,11 @@
           <label class="form-label" for="password">Password</label>
           <input class="form-input" type="text" id="input-password" placeholder="Password" required>
         </div>
-        <div class="loginBtn">
-          <button class="btn btn-lg">SignUp</button>
-        </div>
+        <form class="signupBtn">
+          <button class="btn btn-lg"
+          type="submit">
+          SignUp</button>
+        </form>
       </div>
     </div>
   </div>

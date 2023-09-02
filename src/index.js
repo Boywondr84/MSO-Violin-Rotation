@@ -359,3 +359,16 @@ DELETE_THIS_ROW.addEventListener("click", (event) => {
   // }),
   alert("Delete currently unavailable. Contact admin for manual deletion.");
 });
+
+// signup login forms - when successful remove #blurTable
+const LOGIN_FORM = document.querySelector(".loginBtn");
+LOGIN_FORM.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log("Button clicked");
+});
+
+const SIGNUP_FORM = document.querySelector(".signupBtn");
+SIGNUP_FORM.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log("Signup button clicked");
+});
