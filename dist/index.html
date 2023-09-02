@@ -135,7 +135,6 @@
                 </tbody>
             </table>
         </div>
-        <!-- </form> -->
     </div>
 </div>
 
@@ -163,6 +162,40 @@
             </tr>
     </tbody>
     </table>
+</div>
+
+<!-- Login & signup modal - display on page load, background fuzzy -->
+<div class="modal active" id="modal-login-signup">
+  <div class="modal-container">
+    <div class="divider"></div>
+    <div class="columns">
+      <div class="column">
+        <div class="form-group" id="form-login">
+          <label class="form-label" for="email">E-Mail:</label>
+          <input class="form-input" type="text" id="input-email" placeholder="E-Mail" required>
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="text" id="input-password" placeholder="Password" required>
+        </div>
+        <div class="loginBtn">
+          <button class="btn btn-lg">Login</button>
+        </div>
+      </div>
+      <div class="divider-vert" data-content="OR"></div>
+      <div class="column">
+        <div class="form-group" id="form-signup">
+          <label class="form-label" for="name">Name:</label>
+          <input class="form-input" type="text" id="input-name" placeholder="Name" required>
+          <label class="form-label" for="email">E-Mail:</label>
+          <input class="form-input" type="text" id="input-email" placeholder="E-Mail" required>
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="text" id="input-password" placeholder="Password" required>
+        </div>
+        <div class="loginBtn">
+          <button class="btn btn-lg">SignUp</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
     <script src="bundle.js"></script>

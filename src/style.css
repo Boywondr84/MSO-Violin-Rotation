@@ -173,3 +173,20 @@
   color: red;
   border-color: rgb(104, 1, 1);
 }
+
+#modal-login-signup {
+  background-color: #46305e;
+}
+
+#modal-login-signup {
+  font-size: 25px;
+}
+
+#modal-login-signup .form-group {
+  margin-bottom: 30px;
+  width: 350px;
+}
+
+#modal-login-signup .form-group label {
+  margin-top: 15%;
+}

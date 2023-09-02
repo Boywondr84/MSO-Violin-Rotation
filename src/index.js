@@ -18,6 +18,8 @@ import {
   FieldValue,
 } from "firebase/firestore";
 
+import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDIvjMfNmUtDkaQmEiEu3D0ib1RhMI-o8Q",
   authDomain: "mso-violin-i-rotation.firebaseapp.com",
@@ -30,6 +32,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const DB = getFirestore();
+const AUTH = getAuth();
 
 // collection reference from DB
 const COLREF = collection(DB, "Violinists");
