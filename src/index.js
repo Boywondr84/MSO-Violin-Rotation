@@ -215,33 +215,45 @@ GET_DATA.addEventListener("submit", (event) => {
 
   getDoc(DOCREF).then((doc) => {
     violinDataByID.push({ ...doc.data() });
-    // console.log(violinDataByID[0])
+
+    // destructuring violinDataByID[0]
+    const {
+      adjRotation,
+      firstName,
+      lastName,
+      leave,
+      minutesTime,
+      onCallTime,
+      rnocTime,
+      rotationTime,
+    } = violinDataByID[0];
+    // console.log(leave);
 
     // Player DB data displayed in update form
     VLN_DATA_DISPLAY.removeAttribute("id", "hidden");
-    VLN_DATA_DISPLAY_NAME.innerHTML = `Data for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}:`;
+    VLN_DATA_DISPLAY_NAME.innerHTML = `Data for ${firstName} ${lastName}:`;
 
-    VLN_DATA_ADJ_ROTATION_EL.value = violinDataByID[0].adjRotation;
+    VLN_DATA_ADJ_ROTATION_EL.value = `${adjRotation}`;
     if (!VLN_DATA_ADJ_ROTATION_EL.value) {
       VLN_DATA_ADJ_ROTATION_EL.value = 0;
     }
 
-    VLN_DATA_RNOC_EL.value = violinDataByID[0].rnocTime;
+    VLN_DATA_RNOC_EL.value = `${rnocTime}`;
     if (!VLN_DATA_RNOC_EL.value) {
       VLN_DATA_RNOC_EL.value = 0;
     }
 
-    VLN_DATA_ON_CALL_EL.value = violinDataByID[0].onCallTime;
+    VLN_DATA_ON_CALL_EL.value = `${onCallTime}`;
     if (!VLN_DATA_ON_CALL_EL.value) {
       VLN_DATA_ON_CALL_EL.value = 0;
     }
 
-    VLN_DATA_ROTATION_EL.value = violinDataByID[0].rotationTime;
+    VLN_DATA_ROTATION_EL.value = `${rotationTime}`;
     if (!VLN_DATA_ROTATION_EL.value) {
       VLN_DATA_ROTATION_EL.value = 0;
     }
 
-    VLN_DATA_MINUTES_EL.value = violinDataByID[0].minutesTime;
+    VLN_DATA_MINUTES_EL.value = `${minutesTime}`;
     if (!VLN_DATA_MINUTES_EL.value) {
       VLN_DATA_MINUTES_EL.value = 0;
     }
@@ -249,22 +261,20 @@ GET_DATA.addEventListener("submit", (event) => {
     // Modal table create dynamically
 
     // loop over player leave data here
-    let playerLeave = violinDataByID[0].leave;
-    for (let i = 0; i < playerLeave.length; i++) {
-      // console.log(playerLeave);
+    for (let i = 0; i < leave.length; i++) {
       let rowNum = i;
 
       // dynamically create 'tr' in Modal display
       let fullViolinLeaveDate = document.createElement("tr");
-      fullViolinLeaveDate.innerHTML = playerLeave[i].date;
+      fullViolinLeaveDate.innerHTML = leave[i].date;
       GET_LEAVE_DATE.appendChild(fullViolinLeaveDate);
 
       let fullViolinLeaveType = document.createElement("tr");
-      fullViolinLeaveType.innerHTML = playerLeave[i].type;
+      fullViolinLeaveType.innerHTML = leave[i].type;
       GET_LEAVE_TYPE.appendChild(fullViolinLeaveType);
 
       let fullViolinLeaveNote = document.createElement("tr");
-      fullViolinLeaveNote.innerHTML = playerLeave[i].message;
+      fullViolinLeaveNote.innerHTML = leave[i].message;
       GET_LEAVE_NOTES.appendChild(fullViolinLeaveNote);
 
       let violinLeaveDelete = document.createElement("tr", "button");
