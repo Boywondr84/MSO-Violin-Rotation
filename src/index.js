@@ -23,6 +23,9 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
+  setPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -34,10 +37,25 @@ const firebaseConfig = {
   appId: "1:1032349611479:web:5d03da1703b054e43c8792",
 };
 
-initializeApp(firebaseConfig);
+const APP = initializeApp(firebaseConfig);
 
 const DB = getFirestore();
-const AUTH = getAuth();
+const AUTH = getAuth(APP);
+onAuthStateChanged(AUTH, (user) => {
+  if (user) {
+    const UID = user.uid;
+    console.log(UID);
+  } else {
+    return;
+  }
+});
+// setPersistence(AUTH, browserSessionPersistence)
+//   .then(() => {
+//     return signInWithEmailAndPassword(AUTH, loginEmail, loginPW);
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   });
 
 // collection reference from DB
 const COLREF = collection(DB, "Violinists");
@@ -201,6 +219,7 @@ ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
       `Violinist ${ADD_VIOLINIST_FORM.first.value} ${ADD_VIOLINIST_FORM.last.value} added successfully!`
     );
     ADD_VIOLINIST_FORM.reset();
+    // user.reload()??
     // window.location.reload();
   });
 });
@@ -350,6 +369,7 @@ ADD_LEAVE_FORM.addEventListener("submit", (event) => {
     }),
   }).then(() => {
     alert("Leave submitted successfully!");
+    ADD_LEAVE_FORM.reset();
   });
 });
 
@@ -370,6 +390,7 @@ DELETE_THIS_ROW.addEventListener("click", (event) => {
 
 // set this up as its own page? on successful signup or login redirect?
 // login form
+
 const LOGIN_FORM = document.querySelector(".form-group-login");
 LOGIN_FORM.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -379,7 +400,8 @@ LOGIN_FORM.addEventListener("submit", (event) => {
 
   signInWithEmailAndPassword(AUTH, loginEmail, loginPW)
     .then((cred) => {
-      console.log(cred.user, "logged in");
+      const USER = cred.user;
+      console.log(USER, "logged in");
       if (!cred.user) {
         return;
       } else {
