@@ -119,6 +119,10 @@
   margin-left: 34%;
 }
 
+.logout {
+  float: right;
+}
+
 .modal {
   align-items: center;
   position: fixed;
@@ -174,10 +178,11 @@
   border-color: rgb(104, 1, 1);
 }
 
-#blurTable {
+.blurTable {
   filter: blur(3px);
 }
 
+/* login / signup form */
 #modal-login-signup {
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -186,15 +191,29 @@
   font-size: 25px;
 }
 
-#modal-login-signup .form-group {
+#modal-login-signup form {
   margin-bottom: 30px;
   width: 350px;
 }
 
-#modal-login-signup .form-group label {
+#modal-login-signup label {
   margin-top: 15%;
 }
 
-#modal-login-signup .form-group input {
+#modal-login-signup input {
   margin-top: 20px;
+}
+
+#modal-login-signup button {
+  margin-top: 6%;
+}
+
+.form-group-login {
+  margin-right: 10%;
+}
+
+.loginError {
+  margin-top: 22px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }

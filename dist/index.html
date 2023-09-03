@@ -27,10 +27,7 @@
         <label for="position">Position:</label>
         <input type="number" name="position" min="1" max="12" required />
 
-        <button class="btn btn-lg" 
-          id="add-vln-btn">
-          Add A Violinist!
-        </button>
+        <button class="btn btn-lg" id="add-vln-btn">Add A Violinist!</button>
       </form>
 
       <div class="form-group" id="getVln">
@@ -50,7 +47,8 @@
           </button>
         </form>
         <form class="delete">
-          <button onclick="return confirm('Are you sure you want to delete?');"
+          <button
+            onclick="return confirm('Are you sure you want to delete?');"
             class="btn btn-lg btn-error"
             id="delete-violinist-by-id"
             type="submit"
@@ -59,148 +57,188 @@
           </button>
         </form>
       </div>
+      <div class="logout">
+        <button>Logout</button>
+      </div>
     </div>
 
     <!-- Update Single Violinists' Data -->
     <div>
-        <form class="updateVlnData" id="hidden">
-            <div id="dataDisplay" class="dataDisplay">
-                <p id="displayName"></p>
-                <p>Adjusted Rotation:</p>
-                <input type="number" step=".5" id="adjRotationEl" name="adjRotation">
-                <p>RNOC:</p>
-                <input type="number" min="0" max="8" id="rnocEl" name="rnocTime">
-                <p>On Call:</p>
-                <input type="number" id="onCallEl" name="onCallTime">
-                <p>Rotation:</p>
-                <input type="number" id="rotationEl" name="rotationTime">
-                <p>Minutes:</p>
-                <input type="number" id="minutesEl" name="minutesTime">
-            </div>
-            <div class="updateBtns">
-                <button class="btn btn-lg" id="requestForm">Open Leave Form</button>
-                <button class="btn btn-lg" id="reset">Close Form</button>
-                <button class="btn btn-lg" id="updateVlnBtn">Save Data</button>
-            </div>
-        </form>
-
-        <!-- Modal to Submit Rotation Requests -->
-<div class="modal" id="modal-id">
-    <div class="modal-container">
-        <div class="modal-header">
-            <button class="btn btn-clear" id="closeModal" aria-label="Close"></button>
+      <form class="updateVlnData" id="hidden">
+        <div id="dataDisplay" class="dataDisplay">
+          <p id="displayName"></p>
+          <p>Adjusted Rotation:</p>
+          <input
+            type="number"
+            step=".5"
+            id="adjRotationEl"
+            name="adjRotation"
+          />
+          <p>RNOC:</p>
+          <input type="number" min="0" max="8" id="rnocEl" name="rnocTime" />
+          <p>On Call:</p>
+          <input type="number" min="0" id="onCallEl" name="onCallTime" />
+          <p>Rotation:</p>
+          <input type="number" min="0" id="rotationEl" name="rotationTime" />
+          <p>Minutes:</p>
+          <input type="number" min="0" id="minutesEl" name="minutesTime" />
         </div>
-        <div class="modal-body" id="leaveForm">
-                <div class="form-group">
-                    <label class="form-label" for="leaveDate">Date of Leave:</label>
-                    <input class="form-input" type="date" id="leaveDate" name="playerLeaveDate" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="leaveType">Type of Leave:</label>
-                        <select class="form-select" id="leaveType" name="typeLeave">
-                            <option value="OnCall1">On Call 1</option>
-                            <option value="OnCall2">On Call 2</option>
-                            <option value="NotOnCall">Not On Call</option>
-                        </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="leaveMessage">Notes:</label>
-                        <textarea class="form-input" id="leaveMessage" name="vlnLeaveMessage" placeholder="Add a note" rows="3"></textarea>
-                </div>
+        <div class="updateBtns">
+          <button class="btn btn-lg" id="requestForm">Open Leave Form</button>
+          <button class="btn btn-lg" id="startOver" type="reset">Close Form</button>
+          <button class="btn btn-lg" id="updateVlnBtn">Save Data</button>
+        </div>
+      </form>
+
+      <!-- Modal to Submit Rotation Requests -->
+      <div class="modal" id="modal-id">
+        <div class="modal-container">
+          <div class="modal-header">
+            <button
+              class="btn btn-clear"
+              id="closeModal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="leaveForm">
+            <div class="form-group">
+              <label class="form-label" for="leaveDate">Date of Leave:</label>
+              <input
+                class="form-input"
+                type="date"
+                id="leaveDate"
+                name="playerLeaveDate"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="leaveType">Type of Leave:</label>
+              <select class="form-select" id="leaveType" name="typeLeave">
+                <option value="OnCall1">On Call 1</option>
+                <option value="OnCall2">On Call 2</option>
+                <option value="NotOnCall">Not On Call</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="leaveMessage">Notes:</label>
+              <textarea
+                class="form-input"
+                id="leaveMessage"
+                name="vlnLeaveMessage"
+                placeholder="Add a note"
+                rows="3"
+              ></textarea>
+            </div>
             <form class="leave-data">
-                <button class="btn btn-lg" 
-                    id="leaveSave" 
-                    type="submit">
-                    Save Leave
-                </button>
+              <button class="btn btn-lg" id="leaveSave" type="submit">
+                Save Leave
+              </button>
+            </form>
+          </div>
+          <!-- <form class="row-delete"> -->
+          <div class="table table-scroll">
+            <table class="table" id="leaveDB">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Leave</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="leaveDateDB"></td>
+                  <td id="leaveTypeDB"></td>
+                  <td id="leaveNotesDB"></td>
+                  <td class="deleteRow" id="leaveDelete"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamically displayed data from DB of all violinists -->
+      <div class="table-display blurTable">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Adjusted Rotation</th>
+            <th>RNOC</th>
+            <th>On Call Count</th>
+            <th>Rotation</th>
+            <th>Minutes(rot.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="fullName"></td>
+            <td id="adjustedRotation"></td>
+            <td id="rnoc"></td>
+            <td id="onCall"></td>
+            <td id="rotation"></td>
+            <td id="minutes"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Login & signup modal - display on page load, background fuzzy -->
+    <div class="modal active modal1" id="modal-login-signup">
+      <div class="modal-container">
+        <div class="divider"></div>
+        <div class="columns">
+          <div class="column">
+            <form class="form-group-login" id="form-login">
+              <label class="form-label" for="email">E-Mail:</label>
+              <input
+                class="form-input"
+                type="text"
+                id="loginEmail"
+                placeholder="E-Mail"
+                required
+              />
+              <label class="form-label" for="password">Password</label>
+              <input
+                class="form-input"
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+                required
+              />
+            <div class="loginBtn">
+              <button class="btn btn-lg" type="submit">Login</button>
+            </div>
+            <div class="loginError"></div>
+            </form>
+          </div>
+          <div class="divider-vert" data-content="OR"></div>
+          <div class="column">
+            <form class="form-group-signup" id="form-signup">
+              <label class="form-label" for="email">E-Mail:</label>
+              <input
+                class="form-input"
+                type="text"
+                id="signupEmail"
+                placeholder="E-Mail"
+                required
+              />
+              <label class="form-label" for="password">Password</label>
+              <input
+                class="form-input"
+                type="password"
+                id="signupPassword"
+                placeholder="Password"
+                required
+              />
+            <div class="signupBtn">
+              <button class="btn btn-lg">SignUp</button>
+            </div>
             </form>
         </div>
-        <!-- <form class="row-delete"> -->
-        <div class="table table-scroll">
-            <table class="table" id="leaveDB">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Leave</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="leaveDateDB"></td>
-                        <td id="leaveTypeDB"></td>
-                        <td id="leaveNotesDB"></td>
-                        <td class="deleteRow" id="leaveDelete"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-    <!-- Dynamically displayed data from DB of all violinists -->
-<div class="table-display" id="blurTable">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Adjusted Rotation</th>
-                <th>RNOC</th>
-                <th>On Call Count</th>
-                <th>Rotation</th>
-                <th>Minutes(rot.)</th>
-            </tr>
-        </thead>
-    <tbody>
-            <tr>
-                <td id="fullName"></td>
-                <td id="adjustedRotation"></td>
-                <td id="rnoc"></td>
-                <td id="onCall"></td>
-                <td id="rotation"></td>
-                <td id="minutes"></td>
-            </tr>
-    </tbody>
-    </table>
-</div>
-
-<!-- Login & signup modal - display on page load, background fuzzy -->
-<div class="modal active" id="modal-login-signup">
-  <div class="modal-container">
-    <div class="divider"></div>
-    <div class="columns">
-      <div class="column">
-        <div class="form-group" id="form-login">
-          <label class="form-label" for="email">E-Mail:</label>
-          <input class="form-input" type="text" id="input-email" placeholder="E-Mail" required>
-          <label class="form-label" for="password">Password</label>
-          <input class="form-input" type="text" id="input-password" placeholder="Password" required>
-        </div>
-        <form class="loginBtn">
-          <button class="btn btn-lg"
-          type="submit">
-          Login</button>
-        </form>
-      </div>
-      <div class="divider-vert" data-content="OR"></div>
-      <div class="column">
-        <div class="form-group" id="form-signup">
-          <label class="form-label" for="name">Name:</label>
-          <input class="form-input" type="text" id="input-name" placeholder="Name" required>
-          <label class="form-label" for="email">E-Mail:</label>
-          <input class="form-input" type="text" id="input-email" placeholder="E-Mail" required>
-          <label class="form-label" for="password">Password</label>
-          <input class="form-input" type="text" id="input-password" placeholder="Password" required>
-        </div>
-        <form class="signupBtn">
-          <button class="btn btn-lg"
-          type="submit">
-          SignUp</button>
-        </form>
       </div>
     </div>
-  </div>
-</div>
 
     <script src="bundle.js"></script>
   </body>
