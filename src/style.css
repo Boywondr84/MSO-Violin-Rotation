@@ -14,6 +14,10 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
+.banner img {
+  margin-left: 150%;
+}
+
 /* FORMS */
 #inputForms {
   border-top: 15px solid black;
@@ -185,6 +189,7 @@
 /* login / signup form */
 #modal-login-signup {
   background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 10%;
 }
 
 #modal-login-signup {

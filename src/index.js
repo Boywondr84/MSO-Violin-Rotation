@@ -16,6 +16,8 @@ import {
   updateDoc,
   arrayUnion,
   FieldValue,
+  QuerySnapshot,
+  onValue,
 } from "firebase/firestore";
 
 import {
@@ -26,6 +28,7 @@ import {
   onAuthStateChanged,
   setPersistence,
   browserSessionPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -49,7 +52,8 @@ onAuthStateChanged(AUTH, (user) => {
     return;
   }
 });
-// setPersistence(AUTH, browserSessionPersistence)
+
+// setPersistence(AUTH, browserLocalPersistence)
 //   .then(() => {
 //     return signInWithEmailAndPassword(AUTH, loginEmail, loginPW);
 //   })
@@ -92,7 +96,7 @@ const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 
 // modal
 const MODAL_OPEN = document.querySelector(".modal");
-const MODAL_FILTER = document.querySelector(".modal1");
+// const MODAL_FILTER = document.querySelector(".modal1");
 
 // dynamically display any leave data
 const GET_LEAVE_DATE = document.getElementById("leaveDateDB");
@@ -100,9 +104,12 @@ const GET_LEAVE_TYPE = document.getElementById("leaveTypeDB");
 const GET_LEAVE_NOTES = document.getElementById("leaveNotesDB");
 const DELETE_LEAVE = document.getElementById("leaveDelete");
 
-const GET_TABLE = document.querySelector(".blurTable");
+// const GET_TABLE = document.querySelector(".blurTable");
 
-const LOGIN_ERROR = document.querySelector(".loginError");
+// const LOGIN_ERROR = document.querySelector(".loginError");
+
+// Log out
+let logOut = "http://www.google.com";
 
 // get all collection data
 getDocs(COLREF)
@@ -121,6 +128,7 @@ getDocs(COLREF)
 
       // Fetch form pulls names from DB and uses ID values to submit for data retrieval
       // get by id form action begins at line 208
+
       let getSelectedViolinist = document.createElement("option");
       getSelectedViolinist.text = `${violinistsData[i].firstName} ${violinistsData[i].lastName}`;
       getSelectedViolinist.value = violinistsData[i].id;
@@ -219,8 +227,6 @@ ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
       `Violinist ${ADD_VIOLINIST_FORM.first.value} ${ADD_VIOLINIST_FORM.last.value} added successfully!`
     );
     ADD_VIOLINIST_FORM.reset();
-    // user.reload()??
-    // window.location.reload();
   });
 });
 
@@ -340,7 +346,8 @@ UPDATE_VLN_FORM.addEventListener("submit", (event) => {
 // Reset button
 const BTN_RESET = document.getElementById("startOver");
 BTN_RESET.addEventListener("click", function () {
-  UPDATE_VLN_FORM.setAttribute("id", "hidden");
+  // UPDATE_VLN_FORM.setAttribute("id", "hidden");
+  window.location.reload();
 });
 
 let leaveBtn = document.getElementById("requestForm");
@@ -388,76 +395,75 @@ DELETE_THIS_ROW.addEventListener("click", (event) => {
   alert("Delete currently unavailable. Contact admin for manual deletion.");
 });
 
-// set this up as its own page? on successful signup or login redirect?
-// login form
+// // set this up as its own page? on successful signup or login redirect?
+// // login form
 
-const LOGIN_FORM = document.querySelector(".form-group-login");
-LOGIN_FORM.addEventListener("submit", (event) => {
-  event.preventDefault();
+// const LOGIN_FORM = document.querySelector(".form-group-login");
+// LOGIN_FORM.addEventListener("submit", (event) => {
+//   event.preventDefault();
 
-  const loginEmail = LOGIN_FORM.loginEmail.value;
-  const loginPW = LOGIN_FORM.loginPassword.value;
+//   const loginEmail = LOGIN_FORM.loginEmail.value;
+//   const loginPW = LOGIN_FORM.loginPassword.value;
 
-  signInWithEmailAndPassword(AUTH, loginEmail, loginPW)
-    .then((cred) => {
-      const USER = cred.user;
-      console.log(USER, "logged in");
-      if (!cred.user) {
-        return;
-      } else {
-        MODAL_FILTER.classList.remove("active");
-        GET_TABLE.classList.remove("blurTable");
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-      LOGIN_FORM.reset();
+//   signInWithEmailAndPassword(AUTH, loginEmail, loginPW)
+//     .then((cred) => {
+//       const USER = cred.user;
+//       console.log(USER, "logged in");
+//       if (!cred.user) {
+//         return;
+//       } else {
+//         MODAL_FILTER.classList.remove("active");
+//         // GET_TABLE.classList.remove("blurTable");
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//       LOGIN_FORM.reset();
 
-      const errLogin = document.createElement("h4");
-      errLogin.innerHTML = "User not found!";
-      LOGIN_ERROR.appendChild(errLogin);
+//       const errLogin = document.createElement("h4");
+//       errLogin.innerHTML = "User not found!";
+//       LOGIN_ERROR.appendChild(errLogin);
 
-      const myTimeout = setTimeout(myErrorMsg, 4000);
+//       const myTimeout = setTimeout(myErrorMsg, 4000);
 
-      function myErrorMsg() {
-        errLogin.innerHTML = "";
-      }
-      myTimeout();
-    });
-});
+//       function myErrorMsg() {
+//         errLogin.innerHTML = "";
+//       }
+//       myTimeout();
+//     });
+// });
 
-// logout form
-const LOGOUT = document.querySelector(".logout");
+// // logout form
+const LOGOUT = document.getElementById("logout");
 LOGOUT.addEventListener("click", () => {
-  signOut(AUTH)
-    .then(() => {
-      console.log("logged out");
-      window.location.reload();
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  // signOut(AUTH)
+  //   .then(() => {
+  // window.location = logOut;
+  console.log("button clicked");
+}).catch((err) => {
+  console.log(err.message);
 });
+// });
 
-// signup form
-const SIGNUP_FORM = document.querySelector(".form-group-signup");
-SIGNUP_FORM.addEventListener("submit", (event) => {
-  event.preventDefault();
+// // signup form
+// const SIGNUP_FORM = document.querySelector(".form-group-signup");
+// SIGNUP_FORM.addEventListener("submit", (event) => {
+//   event.preventDefault();
 
-  const signupEmail = SIGNUP_FORM.signupEmail.value;
-  const signupPW = SIGNUP_FORM.signupPassword.value;
+//   const signupEmail = SIGNUP_FORM.signupEmail.value;
+//   const signupPW = SIGNUP_FORM.signupPassword.value;
 
-  createUserWithEmailAndPassword(AUTH, signupEmail, signupPW)
-    .then((cred) => {
-      console.log(cred.user, " created");
-      if (!cred.user) {
-        return;
-      } else {
-        MODAL_FILTER.classList.remove("active");
-        GET_TABLE.classList.remove("blurTable");
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-});
+//   createUserWithEmailAndPassword(AUTH, signupEmail, signupPW)
+//     .then((cred) => {
+//       console.log(cred.user, " created");
+//       if (!cred.user) {
+//         return;
+//       } else {
+//         MODAL_FILTER.classList.remove("active");
+//         GET_TABLE.classList.remove("blurTable");
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+// });
