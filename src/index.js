@@ -96,7 +96,7 @@ const VLN_DATA_MINUTES_EL = document.getElementById("minutesEl");
 
 // modal
 const MODAL_OPEN = document.querySelector(".modal");
-// const MODAL_FILTER = document.querySelector(".modal1");
+const MODAL_FILTER = document.querySelector(".modal1");
 
 // dynamically display any leave data
 const GET_LEAVE_DATE = document.getElementById("leaveDateDB");
@@ -106,7 +106,7 @@ const DELETE_LEAVE = document.getElementById("leaveDelete");
 
 // const GET_TABLE = document.querySelector(".blurTable");
 
-// const LOGIN_ERROR = document.querySelector(".loginError");
+const LOGIN_ERROR = document.querySelector(".loginError");
 
 // Log out
 let logOut = "http://www.google.com";
@@ -227,6 +227,7 @@ ADD_VIOLINIST_FORM.addEventListener("submit", (event) => {
       `Violinist ${ADD_VIOLINIST_FORM.first.value} ${ADD_VIOLINIST_FORM.last.value} added successfully!`
     );
     ADD_VIOLINIST_FORM.reset();
+    window.location.reload();
   });
 });
 
@@ -434,16 +435,17 @@ DELETE_THIS_ROW.addEventListener("click", (event) => {
 // });
 
 // // logout form
-const LOGOUT = document.getElementById("logout");
+const LOGOUT = document.querySelector(".logoutUser");
 LOGOUT.addEventListener("click", () => {
-  // signOut(AUTH)
-  //   .then(() => {
-  // window.location = logOut;
-  console.log("button clicked");
-}).catch((err) => {
-  console.log(err.message);
+  signOut(AUTH)
+    .then(() => {
+      window.location = logOut;
+      console.log("button clicked");
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 });
-// });
 
 // // signup form
 // const SIGNUP_FORM = document.querySelector(".form-group-signup");
