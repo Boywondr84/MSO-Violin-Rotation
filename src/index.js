@@ -237,6 +237,7 @@ onAuthStateChanged(AUTH, (user) => {
 
       deleteDoc(DOCREF).then(() => {
         alert("Violinist deleted!");
+        window.location.reload();
       });
     });
 
@@ -337,6 +338,7 @@ onAuthStateChanged(AUTH, (user) => {
         alert(
           `Data Updated for ${violinDataByID[0].firstName} ${violinDataByID[0].lastName}`
         );
+        window.location.reload();
       });
       UPDATE_VLN_FORM.setAttribute("id", "hidden");
     });
@@ -437,7 +439,6 @@ onAuthStateChanged(AUTH, (user) => {
       signOut(AUTH)
         .then(() => {
           window.location = logOut;
-          console.log("button clicked");
         })
         .catch((err) => {
           console.log(err.message);
