@@ -92,15 +92,13 @@ onAuthStateChanged(AUTH, (user) => {
 
     // modal
     const MODAL_OPEN = document.querySelector(".modal");
-    const MODAL_FILTER = document.querySelector(".modal1");
+    // const MODAL_FILTER = document.querySelector(".modal1");
 
     // dynamically display any leave data
     const GET_LEAVE_DATE = document.getElementById("leaveDateDB");
     const GET_LEAVE_TYPE = document.getElementById("leaveTypeDB");
     const GET_LEAVE_NOTES = document.getElementById("leaveNotesDB");
     const DELETE_LEAVE = document.getElementById("leaveDelete");
-
-    // const GET_TABLE = document.querySelector(".blurTable");
 
     // const LOGIN_ERROR = document.querySelector(".loginError");
 
@@ -395,45 +393,8 @@ onAuthStateChanged(AUTH, (user) => {
       alert("Delete currently unavailable. Contact admin for manual deletion.");
     });
 
-    // // set this up as its own page? on successful signup or login redirect?
-    // // login form
-
-    // const LOGIN_FORM = document.querySelector(".form-group-login");
-    // LOGIN_FORM.addEventListener("submit", (event) => {
-    //   event.preventDefault();
-
-    //   const loginEmail = LOGIN_FORM.loginEmail.value;
-    //   const loginPW = LOGIN_FORM.loginPassword.value;
-
-    //   signInWithEmailAndPassword(AUTH, loginEmail, loginPW)
-    //     .then((cred) => {
-    //       const USER = cred.user;
-    //       console.log(USER, "logged in");
-    //       if (!cred.user) {
-    //         return;
-    //       } else {
-    //         MODAL_FILTER.classList.remove("active");
-    //         // GET_TABLE.classList.remove("blurTable");
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.message);
-    //       LOGIN_FORM.reset();
-
-    //       const errLogin = document.createElement("h4");
-    //       errLogin.innerHTML = "User not found!";
-    //       LOGIN_ERROR.appendChild(errLogin);
-
-    //       const myTimeout = setTimeout(myErrorMsg, 4000);
-
-    //       function myErrorMsg() {
-    //         errLogin.innerHTML = "";
-    //       }
-    //       myTimeout();
-    //     });
-    // });
-
-    // // logout form
+    // signup and login form in login.js
+    // logout form
     const LOGOUT = document.querySelector(".logoutUser");
     LOGOUT.addEventListener("click", () => {
       signOut(AUTH)
@@ -444,29 +405,6 @@ onAuthStateChanged(AUTH, (user) => {
           console.log(err.message);
         });
     });
-
-    // // signup form
-    // const SIGNUP_FORM = document.querySelector(".form-group-signup");
-    // SIGNUP_FORM.addEventListener("submit", (event) => {
-    //   event.preventDefault();
-
-    //   const signupEmail = SIGNUP_FORM.signupEmail.value;
-    //   const signupPW = SIGNUP_FORM.signupPassword.value;
-
-    //   createUserWithEmailAndPassword(AUTH, signupEmail, signupPW)
-    //     .then((cred) => {
-    //       console.log(cred.user, " created");
-    //       if (!cred.user) {
-    //         return;
-    //       } else {
-    //         MODAL_FILTER.classList.remove("active");
-    //         GET_TABLE.classList.remove("blurTable");
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.message);
-    //     });
-    // });
   } else {
     // alert("Need to log in");
 
