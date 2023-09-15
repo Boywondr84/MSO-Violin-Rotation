@@ -49,14 +49,6 @@ onAuthStateChanged(AUTH, (user) => {
     const UID = user.uid;
     console.log(UID);
 
-    // setPersistence(AUTH, browserLocalPersistence)
-    //   .then(() => {
-    //     return signInWithEmailAndPassword(AUTH, loginEmail, loginPW);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-
     // collection reference from DB
     const COLREF = collection(DB, "Violinists");
 
@@ -103,8 +95,7 @@ onAuthStateChanged(AUTH, (user) => {
     // const LOGIN_ERROR = document.querySelector(".loginError");
 
     // Log out
-    let logOut =
-      "file:///C:/Users/ryank/Desktop/projects/Firestore/MSO_Violin_Rotation_Dee/MSO-Violin-Rotation/dist/login.html";
+    let logOut = "./login.html";
 
     // get all collection data
     getDocs(COLREF)
@@ -407,7 +398,7 @@ onAuthStateChanged(AUTH, (user) => {
     });
   } else {
     // alert("Need to log in");
-
+    window.location = "./login.html";
     return;
   }
 });

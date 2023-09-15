@@ -182,10 +182,6 @@
   border-color: rgb(104, 1, 1);
 }
 
-.blurTable {
-  filter: blur(3px);
-}
-
 /* login / signup form */
 #modal-login-signup {
   background-color: rgba(0, 0, 0, 0.7);
