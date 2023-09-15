@@ -30,7 +30,9 @@
 
 /* Add violinist form */
 #add-vln-btn {
-  height: 3rem;
+  height: 2rem;
+  margin-bottom: 5px;
+  margin-left: 15px;
 }
 
 .form-group-add {
@@ -41,6 +43,7 @@
   height: 2rem;
   margin-top: 25px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 /* get violinist form */
@@ -64,14 +67,23 @@
 }
 
 #get-vln-by-id-btn {
-  height: 3rem;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  height: 2rem;
+  margin: 10px 40px 0 15px;
 }
 
 /* delete violinist form */
 #delete-violinist-by-id {
-  height: 3rem;
+  height: 2rem;
+  margin-top: 10px;
+}
+
+.logout {
+  margin-right: 15%;
+  margin-top: 10px;
+}
+
+.logout button {
+  height: 2rem;
 }
 
 .table-display {
