@@ -398,7 +398,7 @@ onAuthStateChanged(AUTH, (user) => {
     });
   } else {
     // alert("Need to log in");
-    window.location = "./login.html";
+    window.location = logOut;
     return;
   }
 });

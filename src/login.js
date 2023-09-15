@@ -29,8 +29,6 @@ const APP = initializeApp(firebaseConfig);
 const AUTH = getAuth(APP);
 
 const LOGIN_ERROR = document.querySelector(".loginError");
-let URL =
-  "file:///C:/Users/ryank/Desktop/projects/Firestore/MSO_Violin_Rotation_Dee/MSO-Violin-Rotation/dist/index.html";
 
 // set this up as its own page? on successful signup or login redirect?
 // login form
@@ -46,12 +44,10 @@ LOGIN_FORM.addEventListener("submit", (event) => {
     .then((cred) => {
       const USER = cred.user;
       console.log(USER, "logged in");
-      if (!cred.user) {
-        return;
+      if (cred.user) {
+        window.location = "./index.html";
       } else {
-        // MODAL_FILTER.classList.remove("active");
-        // GET_TABLE.classList.remove("blurTable");
-        window.location = URL;
+        return;
       }
     })
     .catch((err) => {
